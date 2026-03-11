@@ -1,0 +1,18 @@
+prefixes:
+  edintinf: http://vocab.linkeddata.es/datosabiertos/def/urbanismo-infraestructuras/infraestructura#
+  schema: http://www.owl-ontologies.com/schema#
+  edintmanagementrole: http://vocab.linkeddata.es/datosabiertos/kos/edint/ManagementRoleType/
+
+sources:
+  rolDeGestion-source: ['Madrid_con_punto_observ_id.csv~csv']
+
+mappings:
+  rolDeGestion:
+    sources:
+      - rolDeGestion-source
+    s: http://vocab.linkeddata.es/datosabiertos/recurso/rol-de-gestion/$(rol) #
+    po:
+      - [a, edintinf:ManagementRole]
+      - [edintinf:rolePlayedBy, "http://vocab.linkeddata.es/datosabiertos/recurso/organizacion/$(company)~iri"] # Esto va a Organizacion
+      - [edintinf:hasRoleType, "edintmanagementrole:$(rol)~iri"] # SKOS: basicservices, facilitysecurity, humanresources, maintenance
+      - [edintinf:madeOnInfrastructure, "http://vocab.linkeddata.es/datosabiertos/recurso/equipamiento-municipal/$(equipamiento_municipal)~iri"] # Esto va a equipamientoMunicipal
